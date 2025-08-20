@@ -17,6 +17,7 @@ class SqidsManager implements ManagerInterface
     public function __construct(Container $container)
     {
         $this->container = $container;
+
         $this->config = $container->make('config');
     }
 
