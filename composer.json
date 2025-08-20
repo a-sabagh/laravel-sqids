@@ -1,0 +1,44 @@
+{
+    "name": "a-sabagh/laravel-sqids",
+    "description": "Laravel integration for sqids-php: Generate short YouTube-looking IDs from numbers",
+    "keywords": [
+        "laravel",
+        "sqids",
+        "hashids",
+        "short-quick-ids",
+        "short-quality-ids",
+        "ids"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10.0|^11.0",
+        "sqids/sqids": "^0.4|^0.5"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.24",
+        "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0|^9.0|^10.0",
+        "phpunit/phpunit": "^8.0|^9.3|^10.4|^11.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelSqids\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sqids\\LaravelSqidsServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --colors=always",
+        "pint:dirty": "vendor/bin/pint --dirty -v",
+        "pint:test": "vendor/bin/pint --test",
+        "pint:verbose": "vendor/bin/pint -v"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
