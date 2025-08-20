@@ -4,7 +4,7 @@ namespace LaravelSqids;
 
 use Illuminate\Support\ServiceProvider;
 
-class LaravelSqidsServiceProvider extends ServiceProvider
+class SqidsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
