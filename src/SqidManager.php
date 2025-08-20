@@ -12,8 +12,6 @@ class SqidsManager implements ManagerInterface
 
     protected $config;
 
-    protected array $extensions = [];
-
     protected $drivers = [];
 
     public function __construct(Container $container)
@@ -51,28 +49,8 @@ class SqidsManager implements ManagerInterface
         return $this->drivers[$driver];
     }
 
-    protected function callExtension($driver): object
-    {
-        return $this->extensions[$driver]($this->container);
-    }
-
-    public function extend(string $name, callable $resolver): void
-    {
-        if (isset($this->extensions[$name])) {
-            throw new InvalidArgumentException(sprintf(
-                'Sqids driver [%s] is already registered.', $name
-            ));
-        }
-
-        $this->extensions[$name] = $resolver;
-    }
-
     public function createDriver($driver): object
     {
-        if (isset($this->extensions[$driver])) {
-            return $this->callExtension($driver);
-        }
-
         $config = $this->getDriverConfig($driver);
 
         if (is_null($config)) {

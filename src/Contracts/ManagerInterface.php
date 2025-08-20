@@ -9,6 +9,4 @@ interface ManagerInterface
     public function getDriverConfig(?string $name = null): array;
 
     public function getDefaultDriver(): string;
-
-    public function extend(string $name, callable $resolver): void;
 }
