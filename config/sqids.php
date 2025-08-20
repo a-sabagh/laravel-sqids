@@ -4,12 +4,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Connection Name
+    | Default Driver Name
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which of the connections below you wish to use as
-    | your default connection for all work. Of course, you may use many
-    | connections at once using the manager class.
+    | Here you may specify which of the driver below you wish to use as
+    | your default driver for all work. Of course, you may use many
+    | drivers at once using the manager class.
     |
     */
 
