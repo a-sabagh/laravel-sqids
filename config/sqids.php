@@ -30,7 +30,7 @@ return [
 
         'default' => [
             'pad' => env('SQIDS_DEFAULT_PAD', ''),
-            'length' => env('SQIDS_DEFAULT_LENGTH', '6'),
+            'length' => env('SQIDS_DEFAULT_LENGTH', 6),
             // 'blocklist' => env('SQIDS_DEFAULT_BLOCK_LIST', []),
             // 'alphabet' => env('SQIDS_DEFAULT_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
         ],
