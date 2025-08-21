@@ -32,4 +32,19 @@ class SqidsFacadTest extends TestCase
         $this->assertIsString($encodeString);
     }
 
+    public function test_sqids_encoder_min_length(): void
+    {
+        $expectedStringLength = 5;
+
+        $this->app->config->set('sqids.drivers.default', [
+            'length' => $expectedStringLength,
+        ]);
+
+        $id = fake()->numberBetween(10, 1000);
+
+        $encodeString = Sqids::encode($id);
+        $actualStringLength = strlen($encodeString);
+
+        $this->assertEquals($expectedStringLength, $actualStringLength);
+    }
 }
