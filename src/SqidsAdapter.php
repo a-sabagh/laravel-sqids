@@ -20,4 +20,11 @@ class SqidsAdapter extends Sqids
             blocklist: $this->blocklist
         );
     }
+
+    public function encode(...$numbers): string
+    {
+        $numbers = func_get_args();
+
+        return parent::encode($numbers);
+    }
 }
