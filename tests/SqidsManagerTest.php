@@ -47,4 +47,18 @@ class SqidsManagerTest extends TestCase
         $this->assertEquals(6, $lengthReflectionProperty->getValue($defaultDriver));
         $this->assertEquals('5000', $padReflectionProperty->getValue($defaultDriver));
     }
+
+    public function test_manager_instanciate_default_sqid_with_default_properties(): void
+    {
+        $this->app->config->set('sqids.default', 'default');
+
+        $defaultDriver = $this->app->get(SqidsManager::class)->driver();
+
+        $this->assertInstanceOf(SqidsAdapter::class, $defaultDriver);
+        $reflectionDefaultDriver = new ReflectionClass($defaultDriver);
+        $lengthReflectionProperty = $reflectionDefaultDriver->getProperty('length');
+        $padReflectionProperty = $reflectionDefaultDriver->getProperty('pad');
+        $this->assertNotNull($lengthReflectionProperty->getValue($defaultDriver));
+        $this->assertEmpty($padReflectionProperty->getValue($defaultDriver));
+    }
 }
