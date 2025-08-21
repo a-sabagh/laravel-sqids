@@ -1,8 +1,9 @@
 <?php
 
-namespace LaravelSqids;
+namespace LaravelSqids\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use LaravelSqids\SqidsManager;
 
 class Sqids extends Facade
 {
