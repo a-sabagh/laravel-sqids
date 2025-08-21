@@ -2,6 +2,7 @@
 
 namespace LaravelSqids;
 
+use BadMethodCallException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -69,16 +70,24 @@ class SqidsManager implements ManagerInterface
         return $this->config->has("sqids.drivers.{$driver}");
     }
 
-    public function __call(string $method, array $parameters)
+    public function __call(string $method, array $parameters): mixed
     {
-        if (! method_exists($this->driver(), $method)) {
-            $snakeCase = Str::snake($method);
+        $driver = $this->driver();
 
-            if ($this->driverExists($snakeCase)) {
-                return $this->driver($snakeCase);
-            }
+        if (method_exists($driver, $method)) {
+            return $driver->$method(...$parameters);
         }
 
-        return $this->driver()->$method(...$parameters);
+        $alias = Str::snake($method);
+        if ($this->driverExists($alias)) {
+            return $this->driver($alias);
+        }
+
+        throw new BadMethodCallException(sprintf(
+            'Method "%s" not found on %s and no driver named "%s" exists.',
+            $method,
+            is_object($driver) ? get_class($driver) : (string) $driver,
+            $alias
+        ));
     }
 }
