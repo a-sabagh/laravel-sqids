@@ -2,6 +2,7 @@
 
 namespace LaravelSqids\Tests;
 
+use Illuminate\Support\Collection;
 use LaravelSqids\Facades\Sqids;
 use LaravelSqids\SqidsManager;
 use LaravelSqids\SqidsServiceProvider;
@@ -136,5 +137,19 @@ class SqidsFacadTest extends TestCase
         $decodeNumber = Sqids::decodeInteger($encodeString);
 
         $this->assertSame($id, $decodeNumber);
+    }
+
+    public function test_sqids_adapter_collect_structure(): void
+    {
+        $this->app->config->set('sqids.drivers.default.pad', '');
+
+        $id = fake()->numberBetween(10, 1000);
+
+        $encodeString = Sqids::encode([$id]);
+
+        $decodeCollect = Sqids::decodeCollect($encodeString);
+
+        $this->assertInstanceOf(Collection::class, $decodeCollect);
+        $this->assertSame($decodeCollect->toArray(), [$id]);
     }
 }
