@@ -43,4 +43,9 @@ class SqidsAdapter extends Sqids
 
         return current($decodeArray);
     }
+
+    public function decodeCollect(string $encodeString): Collection
+    {
+        return collect($this->decode($encodeString));
+    }
 }
