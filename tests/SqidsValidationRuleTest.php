@@ -2,8 +2,9 @@
 
 namespace LaravelSqids\Tests;
 
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use LaravelSqids\Facades\Sqids;
+use Illuminate\Support\Facades\Validator;
 use LaravelSqids\Validations\SqidsValidationRule;
 
 class SqidsValidationRuleTest extends TestCase
@@ -18,6 +19,13 @@ class SqidsValidationRuleTest extends TestCase
         );
 
         $this->assertTrue($validator->passes());
+
+        $validator = Validator::make(
+            ['endpoint' => Str::random(32)],
+            ['endpoint' => [new SqidsValidationRule]]
+        );
+
+        $this->assertFalse($validator->passes());
     }
 
     public function test_custom_driver_sqids_validation_rule(): void
