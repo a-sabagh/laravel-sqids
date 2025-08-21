@@ -43,6 +43,17 @@ class SqidsFacadTest extends TestCase
         $this->assertSame($id, $decodeInteger);
     }
 
+    public function test_sqids_decode_integer_by_encode_action(): void
+    {
+        $id = fake()->numberBetween(10, 1000);
+
+        $encodeString = Sqids::encode([$id]);
+
+        $decodeInteger = Sqids::decodeInteger($encodeString);
+
+        $this->assertSame($id, $decodeInteger);
+    }
+
     public function test_sqids_encoder_min_length(): void
     {
         $expectedStringLength = 5;
