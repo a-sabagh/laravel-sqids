@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use LaravelSqids\SqidsAdapter;
 use LaravelSqids\SqidsManager;
 use LaravelSqids\SqidsServiceProvider;
-use Mockery\MockInterface;
 use Orchestra\Testbench\TestCase;
 use ReflectionClass;
 
@@ -46,6 +45,7 @@ class SqidsManagerTest extends TestCase
         $reflectionDefaultDriver = new ReflectionClass($defaultDriver);
         $lengthReflectionProperty = $reflectionDefaultDriver->getProperty('length');
         $padReflectionProperty = $reflectionDefaultDriver->getProperty('pad');
+
         $this->assertEquals(6, $lengthReflectionProperty->getValue($defaultDriver));
         $this->assertEquals('5000', $padReflectionProperty->getValue($defaultDriver));
     }
@@ -77,5 +77,22 @@ class SqidsManagerTest extends TestCase
         $this->expectExceptionMessage('Sqids Driver [pelikan-never-died] is not defined in sqids configuration.');
 
         $this->app->get(SqidsManager::class)->driver('pelikan-never-died');
+    }
+
+    public function test_sqids_manager_driver_on_the_fly(): void
+    {
+        $this->app->config->set('sqids.drivers.url_endpoint', [
+            'pad' => '5000',
+            'length' => 6,
+        ]);
+
+        $urlEndpointDriver = $this->app->get(SqidsManager::class)->driver('url_endpoint');
+
+        $reflectionDefaultDriver = new ReflectionClass($urlEndpointDriver);
+        $lengthReflectionProperty = $reflectionDefaultDriver->getProperty('length');
+        $padReflectionProperty = $reflectionDefaultDriver->getProperty('pad');
+
+        $this->assertEquals(6, $lengthReflectionProperty->getValue($urlEndpointDriver));
+        $this->assertEquals('5000', $padReflectionProperty->getValue($urlEndpointDriver));
     }
 }
