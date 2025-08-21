@@ -61,4 +61,11 @@ class SqidsManagerTest extends TestCase
         $this->assertNotNull($lengthReflectionProperty->getValue($defaultDriver));
         $this->assertEmpty($padReflectionProperty->getValue($defaultDriver));
     }
+
+    public function test_default_config_merge_successfully(): void
+    {
+        $this->app->get(SqidsManager::class)->driver();
+
+        $this->addToAssertionCount(1);
+    }
 }
