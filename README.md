@@ -14,7 +14,6 @@ Generate short, unique, non-sequential IDs for your models, routes, validation, 
 - Easy helpers: `sqid($id)` / `unsqid($hash)`
 - Facade: `Sqids::encode()` / `decode()`
 - Validation rule: `sqid`
-- Route model binding via `HasSqidRouting` trait
 - Fully configurable alphabet, min length, and blocklist
 
 ---
