@@ -47,4 +47,17 @@ class SqidsFacadTest extends TestCase
 
         $this->assertEquals($expectedStringLength, $actualStringLength);
     }
+
+    public function test_sqids_encoder_with_numerical_format(): void
+    {
+        $this->app->config->set('sqids.drivers.default', [
+            'alphabet' => '123456789',
+        ]);
+
+        $id = fake()->numberBetween(10, 1000);
+
+        $encodeString = Sqids::encode($id);
+
+        $this->assertIsNumeric($encodeString);
+    }
 }
