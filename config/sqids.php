@@ -35,7 +35,7 @@ return [
             // 'alphabet' => env('SQIDS_DEFAULT_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
         ],
 
-        'tracking' => [
+        'tracking_code' => [
             'pad' => env('SQIDS_TRACKING_PAD', '5000'),
             'length' => env('SQIDS_TRACKING_LENGTH', '6'),
             'alphabet' => env('SQIDS_TRACKING_ALPHABET', '5364127908'),
