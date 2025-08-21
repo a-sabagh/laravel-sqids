@@ -3,6 +3,7 @@
 namespace LaravelSqids;
 
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 use LaravelSqids\Contracts\ManagerInterface;
 
@@ -63,8 +64,21 @@ class SqidsManager implements ManagerInterface
         return new SqidsAdapter(...$config);
     }
 
+    protected function driverExists(string $driver): bool
+    {
+        return $this->config->has("sqids.drivers.{$driver}");
+    }
+
     public function __call(string $method, array $parameters)
     {
+        if (! method_exists($this->driver(), $method)) {
+            $snakeCase = Str::snake($method);
+
+            if ($this->driverExists($snakeCase)) {
+                return $this->driver($snakeCase);
+            }
+        }
+
         return $this->driver()->$method(...$parameters);
     }
 }

@@ -69,4 +69,37 @@ class SqidsFacadTest extends TestCase
 
         $this->assertIsNumeric($encodeString);
     }
+
+    public function test_sqids_tracking_coder_driver_with_magic_method(): void
+    {
+        $id = fake()->numberBetween(10, 1000);
+
+        $encodeString = Sqids::trackingCode()->encode($id);
+
+        $this->assertIsNumeric($encodeString);
+    }
+
+    public function test_sqids_url_endpoint_driver_formating(): void
+    {
+        $id = fake()->numberBetween(10, 1000);
+
+        $encodeString = Sqids::driver('url_endpoint')->encode($id);
+
+        $this->assertIsString($encodeString);
+        $this->assertNotEmpty($encodeString);
+    }
+
+    public function test_sqids_on_the_fly_driver_magic_call(): void
+    {
+        $this->app->config->set('sqids.drivers.custom_driver', [
+            'alphabet' => '123456789',
+        ]);
+
+        $id = fake()->numberBetween(10, 1000);
+
+        $encodeString = Sqids::customDriver()->encode($id);
+
+        $this->assertIsString($encodeString);
+        $this->assertNotEmpty($encodeString);
+    }
 }
