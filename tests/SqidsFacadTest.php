@@ -23,11 +23,11 @@ class SqidsFacadTest extends TestCase
         $this->assertInstanceOf(SqidsManager::class, $facadeRoot);
     }
 
-    public function test_sqids_encoder_accept_integer(): void
+    public function test_sqids_encode_integer_accept_integer(): void
     {
         $id = fake()->numberBetween(10, 1000);
 
-        $encodeString = Sqids::encode($id);
+        $encodeString = Sqids::encodeInteger($id);
 
         $this->assertIsString($encodeString);
     }
@@ -42,7 +42,7 @@ class SqidsFacadTest extends TestCase
 
         $id = fake()->numberBetween(10, 1000);
 
-        $encodeString = Sqids::encode($id);
+        $encodeString = Sqids::encode([$id]);
         $actualStringLength = strlen($encodeString);
 
         $this->assertEquals($expectedStringLength, $actualStringLength);
@@ -56,7 +56,7 @@ class SqidsFacadTest extends TestCase
 
         $id = fake()->numberBetween(10, 1000);
 
-        $encodeString = Sqids::encode($id);
+        $encodeString = Sqids::encode([$id]);
 
         $this->assertIsNumeric($encodeString);
     }
@@ -65,7 +65,7 @@ class SqidsFacadTest extends TestCase
     {
         $id = fake()->numberBetween(10, 1000);
 
-        $encodeString = Sqids::driver('tracking_code')->encode($id);
+        $encodeString = Sqids::driver('tracking_code')->encode([$id]);
 
         $this->assertIsNumeric($encodeString);
     }
@@ -74,7 +74,7 @@ class SqidsFacadTest extends TestCase
     {
         $id = fake()->numberBetween(10, 1000);
 
-        $encodeString = Sqids::trackingCode()->encode($id);
+        $encodeString = Sqids::trackingCode()->encode([$id]);
 
         $this->assertIsNumeric($encodeString);
     }
@@ -83,7 +83,7 @@ class SqidsFacadTest extends TestCase
     {
         $id = fake()->numberBetween(10, 1000);
 
-        $encodeString = Sqids::driver('url_endpoint')->encode($id);
+        $encodeString = Sqids::driver('url_endpoint')->encode([$id]);
 
         $this->assertIsString($encodeString);
         $this->assertNotEmpty($encodeString);
@@ -97,9 +97,22 @@ class SqidsFacadTest extends TestCase
 
         $id = fake()->numberBetween(10, 1000);
 
-        $encodeString = Sqids::customDriver()->encode($id);
+        $encodeString = Sqids::customDriver()->encode([$id]);
 
         $this->assertIsString($encodeString);
         $this->assertNotEmpty($encodeString);
+    }
+
+    public function test_sqids_decode_validation(): void
+    {
+        $this->app->config->set('sqids.drivers.default.pad', '');
+
+        $id = fake()->numberBetween(10, 1000);
+
+        $encodeString = Sqids::encodeInteger($id);
+
+        $decodeNumber = Sqids::decodeInteger($encodeString);
+
+        $this->assertSame($id, $decodeNumber);
     }
 }

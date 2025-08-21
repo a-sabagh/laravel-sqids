@@ -2,6 +2,7 @@
 
 namespace LaravelSqids;
 
+use Illuminate\Support\Collection;
 use Sqids\Sqids;
 
 class SqidsAdapter extends Sqids
@@ -21,10 +22,25 @@ class SqidsAdapter extends Sqids
         );
     }
 
-    public function encode(...$numbers): string
+    public function encode(array $numbers): string
     {
-        $numbers = func_get_args();
-
         return parent::encode($numbers);
+    }
+
+    public function decode(string $encodeString): array
+    {
+        return parent::decode($encodeString);
+    }
+
+    public function encodeInteger(int $id): string
+    {
+        return $this->encode([$id]);
+    }
+
+    public function decodeInteger(string $encodeString): int
+    {
+        $decodeArray = $this->decode($encodeString);
+
+        return current($decodeArray);
     }
 }
