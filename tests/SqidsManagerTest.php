@@ -95,4 +95,19 @@ class SqidsManagerTest extends TestCase
         $this->assertEquals(6, $lengthReflectionProperty->getValue($urlEndpointDriver));
         $this->assertEquals('5000', $padReflectionProperty->getValue($urlEndpointDriver));
     }
+
+    public function test_sqids_manager_driver_exists(): void
+    {
+        $this->app->config->set('sqids.drivers.url_endpoint', []);
+
+        $sqidsManagerReflection = new ReflectionClass(SqidsManager::class);
+        $driverExistsMethod = $sqidsManagerReflection->getMethod('driverExists');
+        $driverExistsMethod->setAccessible(true);
+
+        /** @var SqidsManager $sqidsManager */
+        $sqidsManager = $this->app->get(SqidsManager::class);
+
+        $this->assertTrue($driverExistsMethod->invoke($sqidsManager, 'url_endpoint'));
+        $this->assertFalse($driverExistsMethod->invoke($sqidsManager, 'not_exists'));
+    }
 }
