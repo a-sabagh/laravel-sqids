@@ -24,11 +24,17 @@ class SqidsAdapter extends Sqids
 
     public function encode(array $numbers): string
     {
-        return parent::encode($numbers);
+        $pad = $this->pad;
+        $encodedString = parent::encode($numbers);
+
+        return "{$pad}{$encodedString}";
     }
 
     public function decode(string $encodeString): array
     {
+        $pad = $this->pad;
+        $encodeString = ltrim($encodeString, $pad);
+
         return parent::decode($encodeString);
     }
 

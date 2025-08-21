@@ -5,19 +5,10 @@ namespace LaravelSqids\Tests;
 use InvalidArgumentException;
 use LaravelSqids\SqidsAdapter;
 use LaravelSqids\SqidsManager;
-use LaravelSqids\SqidsServiceProvider;
-use Orchestra\Testbench\TestCase;
 use ReflectionClass;
 
 class SqidsManagerTest extends TestCase
 {
-    protected function getPackageProviders($app)
-    {
-        return [
-            SqidsServiceProvider::class,
-        ];
-    }
-
     public function test_manager_bind_as_singleton_object(): void
     {
         $sqids = $this->app->get(SqidsManager::class);
