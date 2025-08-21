@@ -45,7 +45,7 @@ return [
             'pad' => env('SQIDS_URL_ENDPOINT_PAD', ''),
             'length' => env('SQIDS_URL_ENDPOINT_LENGTH', '8'),
             'alphabet' => env('SQIDS_URL_ENDPOINT_ALPHABET', '6loKCI3XaO4dqT8sBLGPbpHVu7zgSjnrvkYEhZA2McxeDJyF5RQ9iWUfw1tN0m'),
-        ]
+        ],
     ],
 
 ];
