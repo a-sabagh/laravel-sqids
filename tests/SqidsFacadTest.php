@@ -60,4 +60,13 @@ class SqidsFacadTest extends TestCase
 
         $this->assertIsNumeric($encodeString);
     }
+
+    public function test_sqids_tracking_code_driver_formating(): void
+    {
+        $id = fake()->numberBetween(10, 1000);
+
+        $encodeString = Sqids::driver('tracking_code')->encode($id);
+
+        $this->assertIsNumeric($encodeString);
+    }
 }
