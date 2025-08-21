@@ -43,6 +43,8 @@ class SqidsManagerTest extends TestCase
 
         $reflectionDefaultDriver = new ReflectionClass($defaultDriver);
         $lengthReflectionProperty = $reflectionDefaultDriver->getProperty('length');
+        $padReflectionProperty = $reflectionDefaultDriver->getProperty('pad');
         $this->assertEquals(6, $lengthReflectionProperty->getValue($defaultDriver));
+        $this->assertEquals('5000', $padReflectionProperty->getValue($defaultDriver));
     }
 }
