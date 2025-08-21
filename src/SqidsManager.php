@@ -62,4 +62,9 @@ class SqidsManager implements ManagerInterface
 
         return new SqidsAdapter(...$config);
     }
+
+    public function __call(string $method, array $parameters)
+    {
+        return $this->driver()->$method(...$parameters);
+    }
 }
