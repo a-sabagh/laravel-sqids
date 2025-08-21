@@ -2,9 +2,11 @@
 
 namespace LaravelSqids\Tests;
 
+use InvalidArgumentException;
 use LaravelSqids\SqidsAdapter;
 use LaravelSqids\SqidsManager;
 use LaravelSqids\SqidsServiceProvider;
+use Mockery\MockInterface;
 use Orchestra\Testbench\TestCase;
 use ReflectionClass;
 
@@ -67,5 +69,13 @@ class SqidsManagerTest extends TestCase
         $this->app->get(SqidsManager::class)->driver();
 
         $this->addToAssertionCount(1);
+    }
+
+    public function test_manager_instanciation_failed_beacuse_of_missing_driver(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Sqids Driver [pelikan-never-died] is not defined in sqids configuration.');
+
+        $this->app->get(SqidsManager::class)->driver('pelikan-never-died');
     }
 }

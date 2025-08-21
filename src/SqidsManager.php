@@ -26,7 +26,7 @@ class SqidsManager implements ManagerInterface
         return $this->config->get('sqids.default', 'default');
     }
 
-    public function getDriverConfig(?string $driver = null): array
+    public function getDriverConfig(?string $driver = null): mixed
     {
         $driver = $driver ?: $this->getDefaultDriver();
 
