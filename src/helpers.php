@@ -3,18 +3,18 @@
 use Illuminate\Support\Collection;
 use LaravelSqids\Facades\Sqids;
 
-function sqids(int $id, ?string $driver = null): string
+function sqids(array $numbers, ?string $driver = null): string
 {
     $sqids = Sqids::driver($driver);
 
-    return $sqids->encode($id);
+    return $sqids->encode($numbers);
 }
 
-function unsqids(int $id, ?string $driver = null): string
+function unsqids(string $encodedString, ?string $driver = null): array
 {
     $sqids = Sqids::driver($driver);
 
-    return $sqids->decode($id);
+    return $sqids->decode($encodedString);
 }
 
 function sqidsInt(int $id, ?string $driver = null): int
