@@ -6,6 +6,21 @@
 Laravel adapter for [sqids-php](https://github.com/sqids/sqids-php).  
 Generate short, unique, non-sequential IDs for your models, routes, validation, and more.
 
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Simple Encode & Decode](#simple-encode--decode)
+  - [Usage](#usage)
+  - [Encode and Decode Single Integer](#encode-and-decode-single-integer)
+  - [Decode and get a Laravel Collection](#decode-and-get-a-laravel-collection)
+- [Configuration](#configuration)
+  - [Publish the Config File](#publish-the-config-file)
+  - [Driver Setup](#driver-setup)
+  - [Check if an Encoded String is Valid](#check-if-an-encoded-string-is-valid)
+- [Sqids Custom Validation Rule](#sqids-custom-validation-rule)
+  - [Available Helpers](#available-helpers)
+
 ---
 
 ## Features
@@ -163,7 +178,6 @@ if ($validator->passes()) {
 | `unsqidsCollect(string $encodedString, ?string $driver = null): Collection` |
 
 ```php
-
 // Encode multiple numbers
 $encoded = sqids([1, 2, 3]); // e.g. "Lqj8a0"
 
