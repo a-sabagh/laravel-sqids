@@ -151,3 +151,13 @@ if ($validator->passes()) {
     // Valid Sqid
 }
 ```
+
+### Available Helpers
+
+| Function                                                                    | Description                                          |
+| --------------------------------------------------------------------------- | ---------------------------------------------------- |
+| `sqids(array $numbers, ?string $driver = null): string`                     | Encode an array of integers into a Sqid string.      |
+| `unsqids(string $encodedString, ?string $driver = null): array`             | Decode a Sqid string back into an array of integers. |
+| `sqidsInt(int $id, ?string $driver = null): int`                            | Encode a single integer into a Sqid string.          |
+| `unsqidsInt(string $encodedString, ?string $driver = null): int`            | Decode a Sqid string back into a single integer.     |
+| `unsqidsCollect(string $encodedString, ?string $driver = null): Collection` | Decode a Sqid string into a Laravel Collection.      |
