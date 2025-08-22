@@ -56,9 +56,8 @@ class SqidsAdapter extends Sqids
     }
 
     public function encodedStringValid(string $encodedString): bool
-    {
-        return strlen($encodedString) == ($this->length + strlen($this->pad))
+    {        return strlen($encodedString) >= ($this->length + strlen($this->pad))
             && ! in_array($encodedString, $this->blocklist)
             && str_starts_with($encodedString, $this->pad);
-    }
+        }
 }
