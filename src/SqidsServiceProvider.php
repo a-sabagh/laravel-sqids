@@ -14,4 +14,13 @@ class SqidsServiceProvider extends ServiceProvider
             return new SqidsManager($app);
         });
     }
+
+    public function boot(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/sqids.php' => config_path('laravel-sqids.php'),
+            ], 'laravel-sqids');
+        }
+    }
 }
