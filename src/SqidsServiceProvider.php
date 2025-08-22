@@ -8,7 +8,7 @@ class SqidsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/sqids.php', 'sqids');
+        $this->mergeConfigFrom(__DIR__.'/../config/sqids.php', 'laravel-sqids');
 
         $this->app->singleton(SqidsManager::class, function ($app) {
             return new SqidsManager($app);
