@@ -47,6 +47,5 @@
         "pint:test": "vendor/bin/pint --test",
         "pint:verbose": "vendor/bin/pint -v"
     },
-    "minimum-stability": "dev",
     "prefer-stable": true
 }
