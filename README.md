@@ -154,10 +154,28 @@ if ($validator->passes()) {
 
 ### Available Helpers
 
-| Function                                                                    | Description                                          |
-| --------------------------------------------------------------------------- | ---------------------------------------------------- |
-| `sqids(array $numbers, ?string $driver = null): string`                     | Encode an array of integers into a Sqid string.      |
-| `unsqids(string $encodedString, ?string $driver = null): array`             | Decode a Sqid string back into an array of integers. |
-| `sqidsInt(int $id, ?string $driver = null): int`                            | Encode a single integer into a Sqid string.          |
-| `unsqidsInt(string $encodedString, ?string $driver = null): int`            | Decode a Sqid string back into a single integer.     |
-| `unsqidsCollect(string $encodedString, ?string $driver = null): Collection` | Decode a Sqid string into a Laravel Collection.      |
+| Function                                                                    |
+| --------------------------------------------------------------------------- |
+| `sqids(array $numbers, ?string $driver = null): string`                     |
+| `unsqids(string $encodedString, ?string $driver = null): array`             |
+| `sqidsInt(int $id, ?string $driver = null): int`                            |
+| `unsqidsInt(string $encodedString, ?string $driver = null): int`            |
+| `unsqidsCollect(string $encodedString, ?string $driver = null): Collection` |
+
+```php
+
+// Encode multiple numbers
+$encoded = sqids([1, 2, 3]); // e.g. "Lqj8a0"
+
+// Decode back
+$decoded = unsqids($encoded); // [1, 2, 3]
+
+// Encode a single integer
+$singleEncoded = sqidsInt(123); // e.g. "M7k2b1"
+
+// Decode single integer
+$singleDecoded = unsqidsInt($singleEncoded); // 123
+
+// Decode into a Collection
+$collection = unsqidsCollect($encoded); // Collection([1, 2, 3])
+```
