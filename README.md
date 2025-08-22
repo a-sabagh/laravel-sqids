@@ -78,7 +78,7 @@ Laravel Sqids allows you to customize its behavior via a configuration file. Pub
 Use the following Artisan command to publish the configuration to your application:
 
 ```bash
-php artisan vendor:publish --tag=laravel-sqids
+php artisan vendor:publish --tag=sqids
 ```
 
 Here are each of the drivers setup for your application. Example configuration has been included, but you may add as many drivers as you would like.
