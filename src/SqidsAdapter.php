@@ -33,9 +33,8 @@ class SqidsAdapter extends Sqids
     public function decode(string $encodeString): array
     {
         $pad = $this->pad;
-        $encodeString = ltrim($encodeString, $pad);
 
-        return parent::decode($encodeString);
+        $encodeString = substr($encodeString, strlen($pad));
     }
 
     public function encodeInteger(int $id): string
