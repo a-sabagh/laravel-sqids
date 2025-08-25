@@ -56,8 +56,29 @@ class SqidsAdapter extends Sqids
     }
 
     public function encodedStringValid(string $encodedString): bool
-    {        return strlen($encodedString) >= ($this->length + strlen($this->pad))
-            && ! in_array($encodedString, $this->blocklist)
-            && str_starts_with($encodedString, $this->pad);
-        }
+    {
+        return $this->encodedStringAlphabetFairlyValid($encodedString)
+            && $this->encodedStringMinLengthDefinitiveValid($encodedString)
+            && $this->encodedStringPadDefinitiveValid($encodedString);
+    }
+
+    private function encodedStringAlphabetFairlyValid(string $encodedString): bool
+    {
+        $strippedEncodedString = substr($encodedString, strlen($this->pad));
+
+        $allowedChars = str_split($this->alphabet);
+        $strippedEncodedStringChars = str_split($strippedEncodedString);
+
+        return empty(array_diff($strippedEncodedStringChars, $allowedChars));
+    }
+
+    private function encodedStringMinLengthDefinitiveValid(string $encodedString): bool
+    {
+        return strlen($encodedString) >= ($this->length + strlen($this->pad));
+    }
+
+    private function encodedStringPadDefinitiveValid(string $encodedString): bool
+    {
+        return str_starts_with($encodedString, $this->pad);
+    }
 }
